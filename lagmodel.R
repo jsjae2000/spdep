@@ -1,3 +1,40 @@
+### R code from vignette source 'lat.Rnw'
+# data: NY8_utm18 TCE NY_nb.gal NY8cities Sy_GeoDa1.GAL Sy_GeoDa4.GAL
+###################################################
+### code chunk number 8: lat.Rnw:179-187
+###################################################
+library(rgdal)
+setwd('.//data')
+NY8 <- readOGR(".", "NY8_utm18")
+TCE <- readOGR(".", "TCE")
+library(spdep)
+NY_nb <- read.gal("NY_nb.gal", region.id=row.names(NY8))
+cities <- readOGR(".", "NY8cities")
+
+
+###################################################
+### code chunk number 9: lat.Rnw:193-210
+###################################################
+plot(NY8, border="grey60", axes=TRUE)
+text(coordinates(cities), labels=as.character(cities$names), font=2, cex=0.9)
+text(bbox(NY8)[1,1], bbox(NY8)[2,2], labels="a)", cex=0.8)
+plot(NY8, border="grey60", axes=TRUE)
+points(TCE, pch=1, cex=0.7)
+points(TCE, pch=3, cex=0.7)
+text(coordinates(TCE), labels=as.character(TCE$name), cex=0.7,
+     font=1, pos=c(4,1,4,1,4,4,4,2,3,4,2), offset=0.3)
+text(bbox(NY8)[1,1], bbox(NY8)[2,2], labels="b)", cex=0.8)
+
+
+###################################################
+### code chunk number 10: lat.Rnw:281-282 (eval = FALSE)
+###################################################
+## vignette("nb", package="spdep")
+
+
+###################################################
+### code chunk number 11: lat.Rnw:310-311
+###################################################
 library(spdep)
 
 
@@ -732,3 +769,4 @@ anova(nyGLMp, nyGAMp, test="Chisq")
 ### code chunk number 111: lat.Rnw:3479-3481
 ###################################################
 nylam1 <- c(summary(nyGAMp)$edf)
+
