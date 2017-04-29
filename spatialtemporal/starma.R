@@ -31,7 +31,7 @@ model <- starma(sim, blist, ar, ma)
 ##
 # my modification
 ##
-model_df <- expand.grid(ar = 0:3, ma = 0:3)[-1, ]
+model_df <- expand.grid(ar = 0:5, ma = 0:5)[-1, ]
 model_df$bic <- NA
 for (j in 1:nrow(model_df)) {
   print (j)
@@ -39,4 +39,5 @@ for (j in 1:nrow(model_df)) {
   #model_df$bic[j] <- fit_model$bic
 }
 
-starma_model <- starma(sim, blist, model_df$ar[which.min(model_df$bic)], model_df$ma[which.min(model_df$bic)])
+starma_model <- starma(sim, blist, model_df$ar[which.min(model_df$bic)], model_df$ma[which.min(model_df$bic)], iterate = 5)
+starma_model <- starma(sim, blist, model_df$ar[which.min(model_df$bic)], 3, iterate = 2)$bic
